@@ -1,18 +1,18 @@
 package com.eduardosantos.projetoshopping.controller;
 
+import com.eduardosantos.projetoshopping.service.LojaService;
 import com.eduardosantos.projetoshopping.model.Loja;
 import com.eduardosantos.projetoshopping.model.Segmento;
 import com.eduardosantos.projetoshopping.repository.LojaRepository;
 import com.eduardosantos.projetoshopping.repository.SegmentoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Component;
 
+import javax.ws.rs.*;
 import java.util.Date;
 
-@RestController
+@Path("/lojas")
+@Component
 public class LojaController {
 
     @Autowired
@@ -20,15 +20,22 @@ public class LojaController {
     @Autowired
     SegmentoRepository segmentoRepository;
 
-    @RequestMapping(value = "loja/all", method = RequestMethod.GET)
+    @Autowired
+    LojaService lojaService;
+
+    @Path("/")
+    @Produces("application/json")
+    @GET
     public Iterable<Loja> findAll() {
         Iterable<Loja> todasLojas = lojaRepository.findAll();
         return todasLojas;
     }
 
-    @RequestMapping(value = "loja/salvar", method = RequestMethod.POST)
-    public Loja salvar(@RequestParam("cnpj") String cnpj, @RequestParam("numeroandar") Integer numeroAndar,
-                       @RequestParam("datasaida") Date dataSaida, @RequestParam("tiposegmento") Segmento tipoSegmento) {
+    @Path("/")
+    @Produces("application/json")
+    @POST
+    public Loja salvar(@QueryParam("cnpj") String cnpj, @QueryParam("numeroandar")Integer numeroAndar,
+                       @QueryParam("datasaida")Date dataSaida, @QueryParam("tiposegmento")Segmento tipoSegmento){
         Loja loja = new Loja();
         loja.setCnpj(cnpj);
         loja.setNumeroDoAndar(numeroAndar);
@@ -38,10 +45,12 @@ public class LojaController {
         return loja;
     }
 
-    @RequestMapping(value = "/loja/atualizar", method = RequestMethod.PUT)
-    public Loja atualizar(@RequestParam("cnpj") String cnpj, @RequestParam("numeroandar") Integer numeroAndar,
-                          @RequestParam("datasaida") Date dataSaida, @RequestParam("tiposegmento") Segmento tipoSegmento,
-                          @RequestParam("id") Long id) {
+    @Path("/")
+    @Produces("application/json")
+    @PUT
+    public Loja atualizar(@QueryParam("cnpj") String cnpj, @QueryParam("numeroandar")Integer numeroAndar,
+                          @QueryParam("datasaida")Date dataSaida, @QueryParam("tiposegmento")Segmento tipoSegmento,
+                          @QueryParam("id") Long id){
         Loja loja = lojaRepository.findOne(id);
         loja.setCnpj(cnpj);
         loja.setNumeroDoAndar(numeroAndar);
@@ -51,18 +60,23 @@ public class LojaController {
         return loja;
     }
 
-    @RequestMapping(value = "/loja/remover", method = RequestMethod.DELETE)
-    public String remover(@RequestParam("id") Long id){
-        lojaRepository.delete(id);
-        return "Loja com ID" + id + "deletada";
+    @Path("/lojas")
+    @Produces("application/json")
+    @DELETE
+    public void remover(@QueryParam("id")Long id){
+        lojaService.inativar(id);
     }
 
-    @RequestMapping(value = "loja/adcsegmento", method = RequestMethod.POST)
-    public Loja addSegmento(@RequestParam("idLoja")Long idLoja, @RequestParam("idSegmento") Long idSegmento){
+    @Path("/lojas")
+    @Produces("application/json")
+    @POST
+    public Loja addSegmento(@QueryParam("idloja")Long idLoja, @QueryParam("idsegmento")Long idSegmento){
         Segmento segmento = segmentoRepository.findOne(idSegmento);
         Loja loja = lojaRepository.findOne(idLoja);
         loja.setTipoSegmento(segmento);
         return lojaRepository.save(loja);
     }
+
+
 
 }
