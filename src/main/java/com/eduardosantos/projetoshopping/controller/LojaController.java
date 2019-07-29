@@ -19,21 +19,19 @@ public class LojaController {
     LojaRepository lojaRepository;
     @Autowired
     SegmentoRepository segmentoRepository;
-
     @Autowired
     LojaService lojaService;
 
-    @Path("/")
-    @Produces("application/json")
+
     @GET
+    @Produces("application/json")
     public Iterable<Loja> findAll() {
         Iterable<Loja> todasLojas = lojaRepository.findAll();
         return todasLojas;
     }
 
-    @Path("/")
-    @Produces("application/json")
     @POST
+    @Produces("application/json")
     public Loja salvar(@QueryParam("cnpj") String cnpj, @QueryParam("numeroandar")Integer numeroAndar,
                        @QueryParam("datasaida")Date dataSaida, @QueryParam("tiposegmento")Segmento tipoSegmento){
         Loja loja = new Loja();
@@ -45,9 +43,8 @@ public class LojaController {
         return loja;
     }
 
-    @Path("/")
-    @Produces("application/json")
     @PUT
+    @Produces("application/json")
     public Loja atualizar(@QueryParam("cnpj") String cnpj, @QueryParam("numeroandar")Integer numeroAndar,
                           @QueryParam("datasaida")Date dataSaida, @QueryParam("tiposegmento")Segmento tipoSegmento,
                           @QueryParam("id") Long id){
@@ -60,16 +57,14 @@ public class LojaController {
         return loja;
     }
 
-    @Path("/lojas")
-    @Produces("application/json")
     @DELETE
+    @Produces("application/json")
     public void remover(@QueryParam("id")Long id){
         lojaService.inativar(id);
     }
 
-    @Path("/lojas")
-    @Produces("application/json")
     @POST
+    @Produces("application/json")
     public Loja addSegmento(@QueryParam("idloja")Long idLoja, @QueryParam("idsegmento")Long idSegmento){
         Segmento segmento = segmentoRepository.findOne(idSegmento);
         Loja loja = lojaRepository.findOne(idLoja);
