@@ -7,7 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class ProjetoShoppingApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ProjetoShoppingApplication.class, args);
-	}
+		SpringApplication.run(ProjetoShoppingApplication.class, args);}
 
 }
