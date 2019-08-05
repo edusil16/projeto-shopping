@@ -6,7 +6,7 @@ import javax.persistence.*;
 public class Segmento {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     Long id;
     @Column(name = "tiposegmento")
     String tipoSegmento;

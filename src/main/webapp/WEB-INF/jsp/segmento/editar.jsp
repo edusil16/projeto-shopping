@@ -11,19 +11,19 @@
      ${message}
 
     <br><br>
-    <form method="post" action="<%=request.getContextPath()%>/segmento/edit">
+    <form method="post" action="<%=request.getContextPath()%>/segmento/editar">
         Name:
 
-        <input type="text" name="tiposegmento" value="${novosegmento.tipoSegmento}"  >
+        <input type="text" name="tiposegmento" value="${editarPage.tipoSegmento}"  >
 
         <br><br>
-        <input type="hidden" name="id" value="${novosegmento.id}"  >
+        <input type="hidden" name="id" value="${editarPage.id}"  >
 
         <input type="submit" value="Salvar" />
     </form>
 
      <br><br>
-     <a href="<%=request.getContextPath()%>/segmento/list">Lista de Segmentos</a>
+     <a href="<%=request.getContextPath()%>/segmento/listar">Lista de Segmentos</a>
 
 
 </center>

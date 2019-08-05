@@ -12,7 +12,7 @@
             Criar um tipo de Segmento para as Lojas do Shopping
 
         </h1>
-<form method="post" action="<%=request.getContextPath(%>/segmento/create">
+<form method="post" action="<%=request.getContextPath()%>/segmento/create">
 
 	Nome do Segmento:
 
@@ -20,7 +20,7 @@
 
 	<br><br>
 
-	<input type="submit" name="Salvar" />
+	<input type="submit" value="Salvar"/>
 
 </form>
 

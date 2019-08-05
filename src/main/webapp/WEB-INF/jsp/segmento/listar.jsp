@@ -25,7 +25,7 @@
       <c:forEach var="segmento" items="${listaSegmentos}">
        <tr>
             <td>
-                <a href="<%=request.getContextPath()%>/segmento/edit?id=${segmento.id}">Editar</a>
+                <a href="<%=request.getContextPath()%>/segmento/editar?id=${segmento.id}">Editar</a>
             </td>
             <td>
                 <c:out value="${segmento.id}" />
