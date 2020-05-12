@@ -1,13 +1,13 @@
 
 <h2 align="center">
-   API Catalogo de Produtos
+   Web Application
 </h2>
 
 
 # Clonando este projeto
 
 ```
-$ git clone https://github.com/edusil16/productcatalog.git
+$ git clone https://github.com/edusil16/projeto-shopping.git
 ```
 
 # ❗️ Requisitos
